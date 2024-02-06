@@ -40,6 +40,7 @@ let checkSecretNumber = function () {
     if (scoreNum > highScoreNum) {
       highScoreNum = scoreNum;
       highScore.textContent = scoreNum;
+      localStorage.setItem("highScore", highScoreNum);
     }
   } else {
     highLow(number, secretNumber);
