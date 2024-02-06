@@ -17,7 +17,7 @@ let highScoreNum = 0;
 let highLow = function (num, secretNum) {
   if (scoreNum > 1) {
     guessingText.textContent =
-      num > secretNum ? "Value is too High ⬆ " : "Value is too Low ⬇  ";
+      num > secretNum ? "Value is too High ❗❗" : "Value is too Low ❗❗";
     scoreNum--;
     score.textContent = scoreNum;
   } else {
