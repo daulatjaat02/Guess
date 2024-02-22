@@ -9,47 +9,48 @@ let highScore = document.querySelector(".highScore");
 let check = document.querySelector(".check");
 let again = document.querySelector(".again");
 // defaults
-let secretNumber = +Math.floor(Math.random() * 20) + 1;
-let scoreNum = 20;
+let secretNumber = +Math.floor(Math.random() * 100) + 1;
+let scoreNum = 100;
 let highScoreNum = 0;
 
 // functions
-let highLow = function (num, secretNum) {
-  if (scoreNum > 1) {
-    guessingText.textContent =
-      num > secretNum ? "Value is too High ❗❗" : "Value is too Low ❗❗";
-    scoreNum--;
-    score.textContent = scoreNum;
-  } else {
-    guessingText.textContent = "You lost the game 😔 ";
-    score.textContent = 0;
-  }
+
+let scoreDecrese = function () {
+  scoreNum--;
+  score.textContent = scoreNum;
 };
 
 let checkSecretNumber = function () {
   let number = +EnterNumber.value;
 
-  if (!number || number < 1 || number > 20) {
-    guessingText.textContent = " No Number ❌ ";
+  if (!number || number < 0 || number > 100) {
+    guessingText.textContent = " Invalid Number❌ ";
+    scoreDecrese();
   }
-
-  if (number === secretNumber) {
+  else if (number === secretNumber) {
     numberH.textContent = secretNumber;
     guessingText.textContent = "Correct Number 🎉✅ ";
     document.body.style.backgroundColor = "green";
     if (scoreNum > highScoreNum) {
       highScoreNum = scoreNum;
       highScore.textContent = scoreNum;
-      localStorage.setItem("highScore", highScoreNum);
     }
-  } else {
-    highLow(number, secretNumber);
   }
+  else if (number > 1) {
+    guessingText.textContent =
+      number > secretNumber ? "Value is too High ❗❗" : "Value is too Low ❗❗";
+    scoreDecrese();
+  }
+  else {
+    guessingText.textContent = "You lost the game 😔 ";
+    score.textContent = 0;
+  }
+  EnterNumber.value = '';
 };
 
 let AgainSet = function () {
-  scoreNum = 20;
-  secretNumber = Math.floor(Math.random() * 20) + 1;
+  scoreNum = 100;
+  secretNumber = Math.floor(Math.random() * 100) + 1;
   numberH.textContent = "?";
   document.body.style.backgroundColor = "rgb(46, 42, 42)";
   score.textContent = scoreNum;
